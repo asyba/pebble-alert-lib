@@ -10,4 +10,6 @@ def configure(ctx):
 def build(ctx):
     ctx.load('pebble_sdk')
 
-    ctx.stlib(source   = 'src/alert.c', target   = 'alert')
+    ctx.stlib(
+    	source = ctx.path.ant_glob('src/**/*.c'), 
+    	target = 'alert')
