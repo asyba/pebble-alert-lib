@@ -1,4 +1,3 @@
-
 #
 # This file is the default set of rules to compile a Pebble project.
 #
@@ -17,8 +16,13 @@ def configure(ctx):
 def build(ctx):
     ctx.load('pebble_sdk')
 
-    ctx.pbl_program(source=ctx.path.ant_glob('src/**/*.c'),
-                    target='pebble-app.elf')
+    ctx.pbl_program(
+        source=ctx.path.ant_glob('src/**/*.c'),
+        target='pebble-app.elf',
+        includes=[ctx.path.find_dir('ext/alert/include').abspath()],
+        stlibpath=[ctx.path.find_dir('ext/alert/lib').abspath()],
+        stlib=['alert'])
 
-    ctx.pbl_bundle(elf='pebble-app.elf',
-                   js=ctx.path.ant_glob('src/js/**/*.js'))
+    ctx.pbl_bundle(
+        elf='pebble-app.elf',
+        js=ctx.path.ant_glob('src/js/**/*.js'))
