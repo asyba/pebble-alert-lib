@@ -66,6 +66,10 @@ static void alert_end(void *data)
 	layer_remove_from_parent(alert_lib_background_layer);
 	layer_remove_from_parent(text_layer_get_layer(alert_lib_title_layer));
 	layer_remove_from_parent(text_layer_get_layer(alert_lib_body_layer));
+	
+	layer_destroy(alert_lib_background_layer);
+	text_layer_destroy(alert_lib_title_layer);
+	text_layer_destroy(alert_lib_body_layer);
 
 	//Incase of repeat
 	app_timer_cancel(alert_lib_timer);
